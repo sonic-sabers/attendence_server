@@ -47,7 +47,7 @@ app.use("/api/teacher", teacherRoutes);
 app.use("/api/class", classRoutes);
 app.use("/api/student", studentRoutes);
 
-app.listen(process.env.port || 9000, () => {
+app.listen(process.env.PORT || 9000, () => {
   console.log("Server started");
   connect();
 });
