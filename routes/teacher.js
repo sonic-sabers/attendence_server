@@ -79,8 +79,8 @@ router.post("/register", upload.single("files"), async (req, res, next) => {
   }
 });
 
-router.get("/image", async (req, res) => {
-  const user = await Teacher.findOne({ username: req.body.username });
+router.get("/image/:username", async (req, res) => {
+  const user = await Teacher.findOne({ username: req.params.username });
   if (user) {
     await gfs.find({ filename: user.img }).toArray((err, files) => {
       if (!files[0] || files.length === 0) {
@@ -102,9 +102,9 @@ router.get("/image", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/:username", async (req, res, next) => {
   try {
-    const u = await Teacher.findOne({ username: req.body.username });
+    const u = await Teacher.findOne({ username: req.params.username });
     res.status(200).json(u);
   } catch (error) {
     next(error);
